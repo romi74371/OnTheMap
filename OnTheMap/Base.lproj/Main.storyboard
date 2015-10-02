@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -18,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iuh-iP-Qan">
                                 <rect key="frame" x="277" y="338" width="46" height="30"/>
+                                <animations/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,15 +30,18 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sne-hq-Fio">
                                 <rect key="frame" x="202" y="290" width="196" height="30"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZSb-Qc-jFV">
                                 <rect key="frame" x="202" y="241" width="196" height="30"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ZSb-Qc-jFV" secondAttribute="centerX" constant="-0.5" id="G2r-Jt-hkG"/>
@@ -52,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="-422" y="245"/>
         </scene>
-        <!--Item 2-->
+        <!--List-->
         <scene sceneID="1fr-It-W1z">
             <objects>
-                <viewController id="yTu-qW-zlz" sceneMemberID="viewController">
+                <viewController title="List" id="yTu-qW-zlz" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KTw-p1-mtA"/>
                         <viewControllerLayoutGuide type="bottom" id="SZs-Dt-en2"/>
@@ -63,18 +69,19 @@
                     <view key="view" contentMode="scaleToFill" id="9O7-Mq-X0d">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="ZvW-u3-xux"/>
+                    <tabBarItem key="tabBarItem" title="List" image="ListIco" id="ZvW-u3-xux"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0f-x7-Z6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1816" y="567"/>
         </scene>
-        <!--Item 1-->
+        <!--Map-->
         <scene sceneID="eq5-j3-RHs">
             <objects>
-                <viewController id="1FS-nW-y8X" sceneMemberID="viewController">
+                <viewController title="Map" id="1FS-nW-y8X" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AUr-If-Xpa"/>
                         <viewControllerLayoutGuide type="bottom" id="yDf-MG-le7"/>
@@ -82,9 +89,27 @@
                     <view key="view" contentMode="scaleToFill" id="YTq-22-ckA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="myF-fn-JaI">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <animations/>
+                            </mapView>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yDf-MG-le7" firstAttribute="top" secondItem="myF-fn-JaI" secondAttribute="bottom" id="71J-Qk-3jY"/>
+                            <constraint firstItem="myF-fn-JaI" firstAttribute="centerX" secondItem="YTq-22-ckA" secondAttribute="centerX" id="MQw-5b-FGK"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="myF-fn-JaI" secondAttribute="leading" id="RgR-W4-laC"/>
+                            <constraint firstItem="myF-fn-JaI" firstAttribute="centerY" secondItem="YTq-22-ckA" secondAttribute="centerY" id="Wmk-YQ-uah"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="myF-fn-JaI" secondAttribute="trailing" id="ehV-I4-RTa"/>
+                            <constraint firstItem="myF-fn-JaI" firstAttribute="top" secondItem="AUr-If-Xpa" secondAttribute="bottom" id="jpA-vQ-wzX"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="NqY-iq-YNH"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="MapIco" id="NqY-iq-YNH"/>
+                    <connections>
+                        <outlet property="mapView" destination="myF-fn-JaI" id="fFB-0K-Ver"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5o-ZG-K7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,6 +122,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RQ0-9e-Wgj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="lg1-8Y-7Id" kind="relationship" relationship="rootViewController" id="xy0-Ux-4Zz"/>
@@ -106,14 +132,21 @@
             </objects>
             <point key="canvasLocation" x="270" y="236"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--On The Map-->
         <scene sceneID="b4P-Jm-g1g">
             <objects>
                 <tabBarController id="lg1-8Y-7Id" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="aXD-4N-1bH"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="aXD-4N-1bH">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="FMW-rx-p1l"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="WtQ-yq-PSd"/>
+                            <barButtonItem image="pinIco" id="Y0o-zo-dfY"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4UX-St-CNm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
@@ -126,4 +159,9 @@
             <point key="canvasLocation" x="996" y="236"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ListIco" width="32" height="32"/>
+        <image name="MapIco" width="32" height="32"/>
+        <image name="pinIco" width="32" height="32"/>
+    </resources>
 </document>

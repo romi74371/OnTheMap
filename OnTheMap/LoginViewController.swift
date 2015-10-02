@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTouch(sender: AnyObject) {
-
         UdacityClient.sharedInstance().postCreateSession(EmailText.text!, password: PasswordText.text!) { (success, errorString) in
             if (success != nil) {
                 dispatch_async(dispatch_get_main_queue(), {
