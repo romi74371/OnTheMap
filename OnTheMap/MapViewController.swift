@@ -33,6 +33,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         /* Create and set the logout button */
         self.parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logoutButtonTouchUp")
         
+        ParseClient.sharedInstance().getStudentLocation(100, skip: 100) { (success, errorString) in
+            if (success == true) {
+                print("test")
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertController = UIAlertController(title: "Alert", message:
+                        errorString, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
+            }
+        }
+        
         // The "locations" array is an array of dictionary objects that are similar to the JSON
         // data that you can download from parse.
         let locations = hardCodedLocationData()
