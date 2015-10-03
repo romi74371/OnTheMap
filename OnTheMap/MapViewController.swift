@@ -30,6 +30,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /* Create and set the logout button */
+        self.parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logoutButtonTouchUp")
+        
         // The "locations" array is an array of dictionary objects that are similar to the JSON
         // data that you can download from parse.
         let locations = hardCodedLocationData()
@@ -159,5 +162,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 "updatedAt" : "2015-03-13T03:37:58.389Z"
             ]
         ]
+    }
+    
+    func logoutButtonTouchUp() {
+        UdacityClient.sharedInstance().deleteSession() { (success, errorString) in
+            if (success != nil) {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertController = UIAlertController(title: "Alert", message:
+                        errorString?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
+            }
+        }
     }
 }

@@ -56,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-422" y="245"/>
+            <point key="canvasLocation" x="-410" y="236"/>
         </scene>
         <!--List-->
         <scene sceneID="1fr-It-W1z">
@@ -137,7 +137,6 @@
             <objects>
                 <tabBarController id="lg1-8Y-7Id" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="aXD-4N-1bH">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="FMW-rx-p1l"/>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="WtQ-yq-PSd"/>
                             <barButtonItem image="pinIco" id="Y0o-zo-dfY"/>

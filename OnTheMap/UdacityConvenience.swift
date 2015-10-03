@@ -188,4 +188,24 @@ extension UdacityClient {
             }
         }
     }
+        
+    // MARK: - DELETE Convenience Methods
+        
+    func deleteSession(completionHandler: (result: Int?, error: NSError?) -> Void) {
+            
+        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let parameters = [String: AnyObject]()
+        let mutableMethod : String = Methods.Session
+            
+        /* 2. Make the request */
+        _ = taskForDELETEMethod(mutableMethod, parameters: parameters) { JSONResult, error in
+                
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                completionHandler(result: nil, error: error)
+            } else {
+                completionHandler(result: 1, error: nil)
+            }
+        }
+    }
 }
