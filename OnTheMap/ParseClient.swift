@@ -45,7 +45,8 @@ class ParseClient : NSObject {
             if error != nil { // Handle error...
                 return
             }
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
         }
         task.resume()
         
