@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TsB-mP-s80">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -135,6 +135,94 @@
             </objects>
             <point key="canvasLocation" x="1816" y="-94"/>
         </scene>
+        <!--Student Location Detail View Controller-->
+        <scene sceneID="oYr-Qx-3LA">
+            <objects>
+                <viewController storyboardIdentifier="StudentLocationDetailViewController" id="vMC-aP-OT9" customClass="StudentLocationDetailViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hby-dr-j1o"/>
+                        <viewControllerLayoutGuide type="bottom" id="HlK-fS-yM6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sdf-xW-JTb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5zd-qx-t2K">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                            </mapView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-kH-z6V">
+                                <rect key="frame" x="175" y="79" width="251" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="251" id="aWY-na-GqK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-2i-2LG">
+                                <rect key="frame" x="175" y="28" width="251" height="38"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hv-av-bFo">
+                                <rect key="frame" x="244" y="538" width="114" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Find on Map"/>
+                                <connections>
+                                    <action selector="searchLocationTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="iMD-tY-2td"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arn-Rb-tcE">
+                                <rect key="frame" x="278" y="538" width="46" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Submit"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-66-zLa">
+                                <rect key="frame" x="175" y="79" width="251" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="251" id="Vkb-2c-qkQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QcS-66-zLa" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="7cd-XE-UXe"/>
+                            <constraint firstItem="5zd-qx-t2K" firstAttribute="leading" secondItem="sdf-xW-JTb" secondAttribute="leadingMargin" constant="-16" id="Bwu-zo-2rm"/>
+                            <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="5zd-qx-t2K" secondAttribute="bottom" id="LQe-C4-JlK"/>
+                            <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="arn-Rb-tcE" secondAttribute="bottom" constant="30" id="RSN-vg-8IG"/>
+                            <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="0Hv-av-bFo" secondAttribute="bottom" constant="30" id="TWm-Gm-Ywl"/>
+                            <constraint firstItem="eRk-2i-2LG" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="30" id="VEG-Df-WrG"/>
+                            <constraint firstItem="0Hv-av-bFo" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="Y7m-h7-mIZ"/>
+                            <constraint firstItem="Li4-kH-z6V" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="ah8-uO-j5z"/>
+                            <constraint firstItem="eRk-2i-2LG" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="c5d-e6-BuZ"/>
+                            <constraint firstItem="QcS-66-zLa" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="60" id="mqS-6l-2xo"/>
+                            <constraint firstItem="Li4-kH-z6V" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="60" id="tas-Si-8PD"/>
+                            <constraint firstItem="arn-Rb-tcE" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="urg-gl-tIa"/>
+                            <constraint firstItem="5zd-qx-t2K" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" id="x5C-IW-PMs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5zd-qx-t2K" secondAttribute="trailing" constant="-16" id="zjS-B5-xAs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="findButton" destination="0Hv-av-bFo" id="KrG-WI-QFt"/>
+                        <outlet property="infoLabel" destination="eRk-2i-2LG" id="lsc-D2-Xbv"/>
+                        <outlet property="mapView" destination="5zd-qx-t2K" id="wmW-5o-OZW"/>
+                        <outlet property="studentLocationText" destination="Li4-kH-z6V" id="PLt-Uk-3hS"/>
+                        <outlet property="submitButton" destination="arn-Rb-tcE" id="Tgy-O4-GKL"/>
+                        <outlet property="urlText" destination="QcS-66-zLa" id="2UD-0V-tiC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zmy-Yy-UQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2630" y="55"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Y9t-Ia-vur">
             <objects>
@@ -155,11 +243,19 @@
         <!--On The Map-->
         <scene sceneID="b4P-Jm-g1g">
             <objects>
-                <tabBarController id="lg1-8Y-7Id" sceneMemberID="viewController">
+                <tabBarController id="lg1-8Y-7Id" customClass="TabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="aXD-4N-1bH">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="WtQ-yq-PSd"/>
-                            <barButtonItem image="pinIco" id="Y0o-zo-dfY"/>
+                            <barButtonItem systemItem="refresh" id="WtQ-yq-PSd">
+                                <connections>
+                                    <action selector="reloadTouchUp:" destination="lg1-8Y-7Id" id="KaE-Mx-tQo"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="pinIco" id="Y0o-zo-dfY">
+                                <connections>
+                                    <action selector="pinButtonTouchUp:" destination="lg1-8Y-7Id" id="7Vt-5a-7tZ"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4UX-St-CNm">

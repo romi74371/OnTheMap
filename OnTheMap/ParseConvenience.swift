@@ -18,21 +18,20 @@ extension ParseClient {
     
     func getStudentLocation(limit: Float, skip: Float, completionHandler: (success: Bool, locations: [StudentLocation], errorString: String?) -> Void) {
         
-        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
         let parameters = [ParseClient.ParameterKeys.Limit: limit, ParseClient.ParameterKeys.Skip: skip]
         var resultLocations = [StudentLocation]()
         
-        /* 2. Make the request */
         taskForGETMethod(Methods.StudentLocation, parameters: parameters) { JSONResult, error in
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandler(success: false, locations: resultLocations, errorString: "Get StudentLocation Failed.")
             } else {
                 resultLocations = StudentLocation.locationFromResults((JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]])!)
-                
                 completionHandler(success: true, locations: resultLocations, errorString: nil)
             }
         }
+        
+        //completionHandler(success: true, locations: StudentLocation.locationFromResults(hardCodedLocationData()), errorString: nil)
     }
     
     // MARK: - POST Convenience Methods
@@ -74,7 +73,8 @@ extension ParseClient {
     // JSON data that you will download from Parse.
     
     func hardCodedLocationData() -> [[String : AnyObject]] {
-        return  [
+        return
+        [
             [
                 "createdAt" : "2015-02-24T22:27:14.456Z",
                 "firstName" : "Jessica",

@@ -18,22 +18,18 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        /* Get the app delegate */
+        
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-        /* Get the shared URL session */
         session = NSURLSession.sharedSession()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     @IBAction func loginButtonTouch(sender: AnyObject) {
-        UdacityClient.sharedInstance().postCreateSession(EmailText.text!, password: PasswordText.text!) { (success, errorString) in
-            if (success != nil) {
+        //UdacityClient.sharedInstance().postCreateSession(EmailText.text!, password: PasswordText.text!) { (success, errorString) in
+        UdacityClient.sharedInstance().authenticate(EmailText.text!, password: PasswordText.text!) { (success, firstName, lastName, errorString) in
+            if (success) {
+                self.appDelegate.firstName = firstName
+                self.appDelegate.lastName = lastName
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapNavigationController") as! UINavigationController
                     self.presentViewController(controller, animated: true, completion: nil)
@@ -41,7 +37,7 @@ class LoginViewController: UIViewController {
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     let alertController = UIAlertController(title: "Alert", message:
-                        errorString?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                        errorString, preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
                     
                     self.presentViewController(alertController, animated: true, completion: nil)

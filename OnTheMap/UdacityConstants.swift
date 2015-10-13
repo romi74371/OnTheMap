@@ -26,6 +26,7 @@ extension UdacityClient {
         
         // MARK: Session
         static let Session = "session"
+        static let Users = "users"
         
         /*
         // MARK: Account
@@ -77,6 +78,10 @@ extension UdacityClient {
         // MARK: General
         static let Account = "account"
         static let Registered = "registered"
+        static let Key = "key"
+        static let User = "user"
+        static let FirstName = "first_name"
+        static let LastName = "last_name"
         static let Status = "status"
         static let Error = "error"
         

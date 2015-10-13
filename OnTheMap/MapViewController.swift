@@ -22,6 +22,7 @@ import MapKit
 */
 
 class MapViewController: UIViewController, MKMapViewDelegate {
+    var appDelegate: AppDelegate!
     
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
@@ -30,28 +31,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.delegate = self
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        /* Create and set the logout button */
+        self.mapView.delegate = self
+        
+        // Create and set the logout button
         self.parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: UIBarButtonItemStyle.Plain, target: self, action: "logoutButtonTouchUp")
         
-        ParseClient.sharedInstance().getStudentLocation(10, skip: 10) { (success, result, errorString) in
-            if (success == true) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("Locations loaded!")
-                    self.mapView.addAnnotations(StudentLocation.annotationsFromLocations(result))
-                })
-            } else {
-                print("Loading locations error!")
-                dispatch_async(dispatch_get_main_queue(), {
-                    let alertController = UIAlertController(title: "Alert", message:
-                        errorString, preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                    
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                })
-            }
-        }
+        self.parentViewController!.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshView")
+        
+        refreshView()
     }
     
     func logoutButtonTouchUp() {
@@ -64,6 +53,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                     let alertController = UIAlertController(title: "Alert", message:
                         errorString?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
+            }
+        }
+    }
+    
+    func refreshView() {
+        ParseClient.sharedInstance().getStudentLocation(10, skip: 10) { (success, result, errorString) in
+            if (success == true) {
+                print("Locations loaded!")
+                self.appDelegate.locations = result
+                self.mapView.addAnnotations(StudentLocation.annotationsFromLocations(self.appDelegate.locations!))
+            } else {
+                print("Loading locations error!")
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertController = UIAlertController(title: "Alert", message:
+                        errorString, preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
