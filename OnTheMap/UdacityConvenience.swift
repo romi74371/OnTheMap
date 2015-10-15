@@ -19,6 +19,9 @@ extension UdacityClient {
 
         self.getUserID(userName, password: password) { (success, userID, errorString) in
             if success {
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.userID = userID!
+                
                 self.getUserData(userID) { (success, fistName, lastName, errorString) in
                     if success {
                         completionHandler(success: success, firstName: fistName!, lastName: lastName!, errorString: errorString)

@@ -70,6 +70,8 @@ class ParseClient : NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(applicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])

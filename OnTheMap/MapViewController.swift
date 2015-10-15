@@ -62,7 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func refreshView() {
-        ParseClient.sharedInstance().getStudentLocation(10, skip: 10) { (success, result, errorString) in
+        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: ParseClient.JSONResponseKeys.CreatedAt) { (success, result, errorString) in
             if (success == true) {
                 print("Locations loaded!")
                 self.appDelegate.locations = result

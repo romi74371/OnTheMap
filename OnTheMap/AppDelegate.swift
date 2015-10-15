@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var locations: [StudentLocation]?
+    var userID = "" as String
     var firstName: String?
     var lastName: String?
 

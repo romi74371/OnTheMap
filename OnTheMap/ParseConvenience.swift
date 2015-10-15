@@ -16,12 +16,12 @@ extension ParseClient {
     
     // MARK: - GET Convenience Methods
     
-    func getStudentLocation(limit: Float, skip: Float, completionHandler: (success: Bool, locations: [StudentLocation], errorString: String?) -> Void) {
+    func getStudentLocation(limit: Float, skip: Float, order: String, completionHandler: (success: Bool, locations: [StudentLocation], errorString: String?) -> Void) {
         
-        let parameters = [ParseClient.ParameterKeys.Limit: limit, ParseClient.ParameterKeys.Skip: skip]
+        let parameters = [ParseClient.ParameterKeys.Limit: limit, ParseClient.ParameterKeys.Skip: skip, ParseClient.ParameterKeys.Order: order]
         var resultLocations = [StudentLocation]()
         
-        taskForGETMethod(Methods.StudentLocation, parameters: parameters) { JSONResult, error in
+        taskForGETMethod(Methods.StudentLocation, parameters: parameters as! [String : AnyObject]) { JSONResult, error in
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
                 completionHandler(success: false, locations: resultLocations, errorString: "Get StudentLocation Failed.")
@@ -55,7 +55,8 @@ extension ParseClient {
                 completionHandler(result: nil, error: error)
             } else {
                 //if JSONResult.valueForKey(ParseClient.JSONResponseKeys.Account) != nil {
-                    completionHandler(result: 1, error: nil)
+                completionHandler(result: 1, error: nil)
+                print(JSONResult)
                 //} else {
                     if JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) != nil {
                         completionHandler(result: nil, error: NSError(domain: "login", code: 0, userInfo: [NSLocalizedDescriptionKey: JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) as! String]))
@@ -63,6 +64,43 @@ extension ParseClient {
                         completionHandler(result: nil, error: NSError(domain: "login", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not login to Parse"]))
                     }
                 //}
+            }
+        }
+    }
+    
+    func postStudentLocation(firstName: String, lastName: String, uniqueKey: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandler: (result: Bool, error: String?) -> Void) {
+        
+        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let parameters = [String: AnyObject]()
+        let mutableMethod : String = Methods.StudentLocation
+        
+        let jsonBody : [String:AnyObject] = [
+            ParseClient.JSONBodyKeys.FistName: firstName,
+            ParseClient.JSONBodyKeys.LastName: lastName,
+            ParseClient.JSONBodyKeys.UniqueKey: uniqueKey,
+            ParseClient.JSONBodyKeys.MapString: mapString,
+            ParseClient.JSONBodyKeys.MediaURL: mediaURL,
+            ParseClient.JSONBodyKeys.Latitude: latitude,
+            ParseClient.JSONBodyKeys.Longitude: longitude
+        ]
+        
+        /* 2. Make the request */
+        _ = taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { JSONResult, error in
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                completionHandler(result: false, error: error.localizedDescription)
+            } else {
+                print(JSONResult)
+                if JSONResult.valueForKey(ParseClient.JSONResponseKeys.CreatedAt) != nil {
+                    completionHandler(result: true, error: nil)
+                } else {
+                    if JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) != nil {
+                        completionHandler(result: false, error: JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) as! String)
+                    } else {
+                        completionHandler(result: false, error: "Could not post student location")
+                    }
+                }
             }
         }
     }

@@ -43,15 +43,33 @@ class StudentLocationDetailViewController: UIViewController {
         self.infoLabel.text = "Where are you studying today?"
     }
     
+    @IBAction func submitTouchUp(sender: AnyObject) {
+        print(self.appDelegate.userID)
+        ParseClient.sharedInstance().postStudentLocation(self.appDelegate.firstName!, lastName: self.appDelegate.lastName!, uniqueKey: self.appDelegate.userID, mapString: studentLocationText.text!, mediaURL: urlText.text!, latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude) { (success, errorString) in
+            if (success == true) {
+                print("Location stored!")
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            } else {
+                print("Submiting location error!")
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alertController = UIAlertController(title: "Alert", message:
+                        errorString, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
+            }
+        }
+    }
+    
     @IBAction func searchLocationTouchUp(sender: AnyObject) {
         CLGeocoder().geocodeAddressString(studentLocationText.text!) { (placemarks, error) -> Void in
             
             if let placemark = placemarks?[0] {
                 self.annotation.coordinate = CLLocationCoordinate2D(latitude: (placemark.location?.coordinate.latitude)!, longitude: (placemark.location?.coordinate.longitude)!)
                 self.annotation.title = "\(self.appDelegate.firstName) \(self.appDelegate.lastName)"
-                //annotation.subtitle = mediaURL
-                
-                print(self.annotation.title)
                 
                 self.mapView.addAnnotation(self.annotation)
                 
@@ -81,7 +99,6 @@ class StudentLocationDetailViewController: UIViewController {
     }
 
     func cancel(sender: UIBarButtonItem) {
-        //dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popViewControllerAnimated(true)
     }
 }
