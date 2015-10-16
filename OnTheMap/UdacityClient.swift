@@ -156,15 +156,11 @@ class UdacityClient : NSObject {
     
     /* Helper: Given a response with error, see if a status_message is returned, otherwise return the previous error */
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError) -> NSError {
-        
-        if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
+        if data != nil {
+            if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
             
-            //if let errorMessage = parsedResult[UdacityClient.JSONResponseKeys.StatusMessage] as? String {
-                
-                //let userInfo = [NSLocalizedDescriptionKey : errorMessage]
-                
                 return NSError(domain: "Udacity Error", code: 1, userInfo: [NSLocalizedDescriptionKey : "TBD"])
-            //}
+            }
         }
         
         return error

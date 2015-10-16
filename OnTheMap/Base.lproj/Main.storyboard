@@ -22,29 +22,38 @@
                                 <rect key="frame" x="277" y="338" width="46" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Login">
+                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTouch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wo6-OA-ayL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sne-hq-Fio">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sne-hq-Fio">
                                 <rect key="frame" x="202" y="290" width="196" height="30"/>
                                 <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZSb-Qc-jFV">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZSb-Qc-jFV">
                                 <rect key="frame" x="202" y="241" width="196" height="30"/>
                                 <animations/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ioh-7z-o9p">
+                                <rect key="frame" x="260" y="106" width="81" height="82"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="ZSb-Qc-jFV" secondAttribute="centerX" constant="-0.5" id="G2r-Jt-hkG"/>
+                            <constraint firstItem="ZSb-Qc-jFV" firstAttribute="top" secondItem="ioh-7z-o9p" secondAttribute="bottom" constant="53" id="GaU-1a-B84"/>
+                            <constraint firstItem="ioh-7z-o9p" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="LV6-qX-Rvi"/>
                             <constraint firstAttribute="centerX" secondItem="Iuh-iP-Qan" secondAttribute="centerX" id="RZI-2j-AhP"/>
                             <constraint firstAttribute="centerX" secondItem="sne-hq-Fio" secondAttribute="centerX" constant="-0.5" id="r5b-kJ-g0u"/>
                         </constraints>
@@ -135,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="1816" y="-94"/>
         </scene>
-        <!--Student Location Detail View Controller-->
+        <!--Post View Controller-->
         <scene sceneID="oYr-Qx-3LA">
             <objects>
-                <viewController storyboardIdentifier="StudentLocationDetailViewController" id="vMC-aP-OT9" customClass="StudentLocationDetailViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostViewController" id="vMC-aP-OT9" customClass="PostViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hby-dr-j1o"/>
                         <viewControllerLayoutGuide type="bottom" id="HlK-fS-yM6"/>
@@ -150,6 +159,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5zd-qx-t2K">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </mapView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-kH-z6V">
                                 <rect key="frame" x="175" y="79" width="251" height="30"/>
@@ -160,30 +170,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-2i-2LG">
-                                <rect key="frame" x="175" y="28" width="251" height="38"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hv-av-bFo">
-                                <rect key="frame" x="244" y="538" width="114" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Find on Map"/>
-                                <connections>
-                                    <action selector="searchLocationTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="iMD-tY-2td"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arn-Rb-tcE">
-                                <rect key="frame" x="278" y="538" width="46" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="submitTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="M8a-w6-PnR"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-66-zLa">
                                 <rect key="frame" x="175" y="79" width="251" height="30"/>
                                 <animations/>
@@ -193,27 +179,76 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-2i-2LG">
+                                <rect key="frame" x="175" y="28" width="251" height="38"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="w9J-yu-X42">
+                                <rect key="frame" x="290" y="239" width="20" height="20"/>
+                                <animations/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hv-av-bFo">
+                                <rect key="frame" x="243" y="130" width="114" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Find on Map">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="searchLocationTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="iMD-tY-2td"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arn-Rb-tcE">
+                                <rect key="frame" x="277" y="130" width="46" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="M8a-w6-PnR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4EJ-Uf-BL4">
+                                <rect key="frame" x="458" y="79" width="53" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Browse">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="browseTouchUp:" destination="vMC-aP-OT9" eventType="touchUpInside" id="ZLI-gc-7gQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QcS-66-zLa" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="7cd-XE-UXe"/>
                             <constraint firstItem="5zd-qx-t2K" firstAttribute="leading" secondItem="sdf-xW-JTb" secondAttribute="leadingMargin" constant="-16" id="Bwu-zo-2rm"/>
+                            <constraint firstItem="0Hv-av-bFo" firstAttribute="top" secondItem="QcS-66-zLa" secondAttribute="bottom" constant="21" id="JVF-LM-IpE"/>
                             <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="5zd-qx-t2K" secondAttribute="bottom" id="LQe-C4-JlK"/>
-                            <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="arn-Rb-tcE" secondAttribute="bottom" constant="30" id="RSN-vg-8IG"/>
-                            <constraint firstItem="HlK-fS-yM6" firstAttribute="top" secondItem="0Hv-av-bFo" secondAttribute="bottom" constant="30" id="TWm-Gm-Ywl"/>
                             <constraint firstItem="eRk-2i-2LG" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="30" id="VEG-Df-WrG"/>
-                            <constraint firstItem="0Hv-av-bFo" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="Y7m-h7-mIZ"/>
+                            <constraint firstItem="arn-Rb-tcE" firstAttribute="top" secondItem="QcS-66-zLa" secondAttribute="bottom" constant="21" id="Wkh-aB-AQf"/>
                             <constraint firstItem="Li4-kH-z6V" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="ah8-uO-j5z"/>
+                            <constraint firstItem="0Hv-av-bFo" firstAttribute="centerX" secondItem="5zd-qx-t2K" secondAttribute="centerX" id="bC5-hV-esh"/>
                             <constraint firstItem="eRk-2i-2LG" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="c5d-e6-BuZ"/>
+                            <constraint firstItem="4EJ-Uf-BL4" firstAttribute="leading" secondItem="QcS-66-zLa" secondAttribute="trailing" constant="5" id="iKx-wX-kWd"/>
+                            <constraint firstItem="w9J-yu-X42" firstAttribute="centerY" secondItem="5zd-qx-t2K" secondAttribute="centerY" id="iaa-6R-i64"/>
                             <constraint firstItem="QcS-66-zLa" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="60" id="mqS-6l-2xo"/>
+                            <constraint firstItem="4EJ-Uf-BL4" firstAttribute="centerY" secondItem="QcS-66-zLa" secondAttribute="centerY" id="nRs-hK-DjP"/>
+                            <constraint firstItem="w9J-yu-X42" firstAttribute="centerX" secondItem="5zd-qx-t2K" secondAttribute="centerX" id="nkj-KV-yAs"/>
                             <constraint firstItem="Li4-kH-z6V" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" constant="60" id="tas-Si-8PD"/>
-                            <constraint firstItem="arn-Rb-tcE" firstAttribute="centerX" secondItem="sdf-xW-JTb" secondAttribute="centerX" id="urg-gl-tIa"/>
+                            <constraint firstItem="arn-Rb-tcE" firstAttribute="centerX" secondItem="5zd-qx-t2K" secondAttribute="centerX" id="tgC-dX-TK3"/>
                             <constraint firstItem="5zd-qx-t2K" firstAttribute="top" secondItem="Hby-dr-j1o" secondAttribute="bottom" id="x5C-IW-PMs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5zd-qx-t2K" secondAttribute="trailing" constant="-16" id="zjS-B5-xAs"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="w9J-yu-X42" id="uU1-Eh-fpq"/>
+                        <outlet property="browseButton" destination="4EJ-Uf-BL4" id="lHk-eH-HHf"/>
                         <outlet property="findButton" destination="0Hv-av-bFo" id="KrG-WI-QFt"/>
                         <outlet property="infoLabel" destination="eRk-2i-2LG" id="lsc-D2-Xbv"/>
                         <outlet property="mapView" destination="5zd-qx-t2K" id="wmW-5o-OZW"/>
@@ -280,6 +315,7 @@
     <resources>
         <image name="ListIco" width="32" height="32"/>
         <image name="MapIco" width="32" height="32"/>
+        <image name="logo" width="89" height="96"/>
         <image name="pinIco" width="32" height="32"/>
     </resources>
 </document>

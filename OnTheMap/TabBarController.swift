@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     }
     
     @IBAction func pinButtonTouchUp(sender: AnyObject) {
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("StudentLocationDetailViewController") as! StudentLocationDetailViewController
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PostViewController") as! PostViewController
         self.navigationController!.pushViewController(controller, animated: true)
     }
 }

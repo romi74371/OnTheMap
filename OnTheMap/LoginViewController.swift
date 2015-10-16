@@ -24,7 +24,11 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTouch(sender: AnyObject) {
-        //UdacityClient.sharedInstance().postCreateSession(EmailText.text!, password: PasswordText.text!) { (success, errorString) in
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        
         UdacityClient.sharedInstance().authenticate(EmailText.text!, password: PasswordText.text!) { (success, firstName, lastName, errorString) in
             if (success) {
                 self.appDelegate.firstName = firstName
@@ -39,6 +43,14 @@ class LoginViewController: UIViewController {
                     let alertController = UIAlertController(title: "Alert", message:
                         errorString, preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                    
+                    animation.fromValue = NSValue(CGPoint: CGPointMake(self.EmailText.center.x - 10, self.EmailText.center.y))
+                    animation.toValue = NSValue(CGPoint: CGPointMake(self.EmailText.center.x + 10, self.EmailText.center.y))
+                    self.EmailText.layer.addAnimation(animation, forKey: "position")
+                    
+                    animation.fromValue = NSValue(CGPoint: CGPointMake(self.PasswordText.center.x - 10, self.PasswordText.center.y))
+                    animation.toValue = NSValue(CGPoint: CGPointMake(self.PasswordText.center.x + 10, self.PasswordText.center.y))
+                    self.PasswordText.layer.addAnimation(animation, forKey: "position")
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 })
