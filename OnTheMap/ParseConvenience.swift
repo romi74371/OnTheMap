@@ -13,7 +13,6 @@ import MapKit
 // MARK: - Convenient Resource Methods
 
 extension ParseClient {
-    
     // MARK: - GET Convenience Methods
     
     func getStudentLocation(limit: Float, skip: Float, order: String, completionHandler: (success: Bool, locations: [StudentLocation], errorString: String?) -> Void) {

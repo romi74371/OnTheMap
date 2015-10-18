@@ -62,11 +62,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func refreshView() {
-        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: ParseClient.JSONResponseKeys.CreatedAt) { (success, result, errorString) in
+        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: "-\(ParseClient.JSONResponseKeys.CreatedAt)") { (success, result, errorString) in
             if (success == true) {
                 print("Locations loaded!")
-                self.appDelegate.locations = result
-                self.mapView.addAnnotations(StudentLocation.annotationsFromLocations(self.appDelegate.locations!))
+                ParseClient.sharedInstance().locations = result.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
+                self.mapView.addAnnotations(StudentLocation.annotationsFromLocations(ParseClient.sharedInstance().locations!))
             } else {
                 print("Loading locations error!")
                 dispatch_async(dispatch_get_main_queue(), {

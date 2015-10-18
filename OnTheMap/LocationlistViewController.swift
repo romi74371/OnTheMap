@@ -37,11 +37,11 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellReuseIdentifier = "LocationlistTableViewCell"
         
-        let location = appDelegate.locations![indexPath.row]
+        let location = ParseClient.sharedInstance().locations![indexPath.row]
         var cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell?
         
         /* Set cell defaults */
-        cell!.textLabel!.text = "\(location.firstName) \(location.lastName)"
+        cell!.textLabel!.text = "\(location.firstName) \(location.lastName) \(location.createdAt)"
         cell!.imageView!.image = UIImage(named: "pinIco")
         cell!.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
         
@@ -49,12 +49,12 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appDelegate.locations!.count
+        return ParseClient.sharedInstance().locations!.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
-        let location = appDelegate.locations![indexPath.row]
+        let location = ParseClient.sharedInstance().locations![indexPath.row]
         app.openURL(NSURL(string: location.mediaURL)!)
     }
     
@@ -81,10 +81,10 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshView() {
-        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: ParseClient.JSONResponseKeys.CreatedAt) { (success, result, errorString) in
+        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: "-\(ParseClient.JSONResponseKeys.CreatedAt)") { (success, result, errorString) in
             if (success == true) {
                 print("Locations loaded!")
-                self.appDelegate.locations = result
+                ParseClient.sharedInstance().locations = result.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
                 self.locationsTableView?.reloadData();
             } else {
                 print("Loading locations error!")

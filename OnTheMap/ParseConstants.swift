@@ -22,30 +22,10 @@ extension ParseClient {
         
         // MARK: Session
         static let StudentLocation = "StudentLocation"
-        
-        /*
-        // MARK: Account
-        static let Account = "account"
-        static let AccountIDFavoriteMovies = "account/{id}/favorite/movies"
-        static let AccountIDFavorite = "account/{id}/favorite"
-        static let AccountIDWatchlistMovies = "account/{id}/watchlist/movies"
-        static let AccountIDWatchlist = "account/{id}/watchlist"
-        
-        // MARK: Authentication
-        static let AuthenticationTokenNew = "authentication/token/new"
-        static let AuthenticationSessionNew = "authentication/session/new"
-        
-        // MARK: Search
-        static let SearchMovie = "search/movie"
-        
-        // MARK: Config
-        static let Config = "configuration"
-        */
     }
     
     // MARK: - URL Keys
     struct URLKeys {
-        
         static let UserID = "id"
         
     }

@@ -15,7 +15,7 @@ struct StudentLocation {
     var mediaURL = ""
     var latitude = 0.0
     var longitude = 0.0
-    //var createdAt = NSDate()
+    var createdAt = NSDate()
     
     /* Construct a StudentLocation from a dictionary */
     init(dictionary: [String : AnyObject]) {
@@ -26,12 +26,10 @@ struct StudentLocation {
         
         latitude = CLLocationDegrees(dictionary["latitude"] as! Double)
         longitude = CLLocationDegrees(dictionary["longitude"] as! Double)
-        print(dictionary["createdAt"])
-        //var dateFormatter = NSDateFormatter()
-        //dateFormatter.dateFormat = "YYYY-MM-DDThh:mm:ss.fff" //format style. Browse online to get a format that fits your needs.
-        //var dateString = dateFormatter.stringFromDate(date)
-        
-        //createdAt = (dateFormatter.dateFromString(dictionary["createdAt"] as! String) as NSDate?)!
+
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"        
+        createdAt = (dateFormatter.dateFromString(dictionary["createdAt"] as! String) as NSDate?)!
     }
     
     func getAnnotation() -> MKPointAnnotation {
