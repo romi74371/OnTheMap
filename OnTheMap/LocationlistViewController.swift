@@ -41,7 +41,7 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
         var cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell?
         
         /* Set cell defaults */
-        cell!.textLabel!.text = "\(location.firstName) \(location.lastName) \(location.createdAt)"
+        cell!.textLabel!.text = "\(location.firstName) \(location.lastName) \(location.updatedAt)"
         cell!.imageView!.image = UIImage(named: "pinIco")
         cell!.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
         
@@ -49,7 +49,11 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().locations!.count
+        if (ParseClient.sharedInstance().locations != nil) {
+            return ParseClient.sharedInstance().locations!.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -81,10 +85,10 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func refreshView() {
-        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: "-\(ParseClient.JSONResponseKeys.CreatedAt)") { (success, result, errorString) in
+        ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: "-\(ParseClient.JSONResponseKeys.UpdatedAt)") { (success, result, errorString) in
             if (success == true) {
                 print("Locations loaded!")
-                ParseClient.sharedInstance().locations = result!.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
+                ParseClient.sharedInstance().locations = result!.sort({ $0.updatedAt.compare($1.updatedAt) == .OrderedDescending })
                 self.locationsTableView?.reloadData();
             } else {
                 print("Loading locations error!")

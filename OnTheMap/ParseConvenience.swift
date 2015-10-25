@@ -91,7 +91,7 @@ extension ParseClient {
                 completionHandler(result: false, error: error.localizedDescription)
             } else {
                 print(JSONResult)
-                if JSONResult.valueForKey(ParseClient.JSONResponseKeys.CreatedAt) != nil {
+                if JSONResult.valueForKey(ParseClient.JSONResponseKeys.UpdatedAt) != nil {
                     completionHandler(result: true, error: nil)
                 } else {
                     if JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) != nil {

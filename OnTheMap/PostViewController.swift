@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PostViewController: UIViewController, UITextFieldDelegate  {
+class PostViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate  {
     
     var appDelegate: AppDelegate!
     var session: NSURLSession!
@@ -59,6 +59,20 @@ class PostViewController: UIViewController, UITextFieldDelegate  {
         self.findButton.hidden = false
         self.infoLabel.hidden = false
         self.infoLabel.text = "Where are you studying today?"
+        
+        self.studentLocationText.delegate = self;
+        
+        /* Configure tap recognizer */
+        var tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.delegate = self
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    // MARK: - Dismiss Keyboard
+    
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     @IBAction func browseTouchUp(sender: AnyObject) {
@@ -158,7 +172,7 @@ class PostViewController: UIViewController, UITextFieldDelegate  {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
-        self.shouldMoveKeyboard = true
+        //self.shouldMoveKeyboard = true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method

@@ -41,11 +41,15 @@ class ParseClient : NSObject {
         request.addValue(apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         let task = session.dataTaskWithRequest(request) {data, response, error in
+            print(data)
+            print(response)
+            print(error)
             if error != nil { // Handle error...
-                return
+                _ = ParseClient.errorForData(data, response: response, error: error!)
+                completionHandler(result: nil, error: error)
+            } else {
+                ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
             }
-            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
         }
         task.resume()
         
