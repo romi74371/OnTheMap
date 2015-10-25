@@ -96,15 +96,26 @@ class PostViewController: UIViewController, UITextFieldDelegate  {
         }
     }
     
-    @IBAction func searchLocationTouchUp(sender: AnyObject) {
-        CLGeocoder().geocodeAddressString(studentLocationText.text!) { (placemarks, error) -> Void in
-            self.activityIndicator.hidden = false
-            self.activityIndicator.startAnimating()
-            
+    func loadLocation(loacationName :String, completionHandler: (Bool) -> ()) {
+        CLGeocoder().geocodeAddressString(loacationName) { (placemarks, error) -> Void in
             if let placemark = placemarks?[0] {
                 self.annotation.coordinate = CLLocationCoordinate2D(latitude: (placemark.location?.coordinate.latitude)!, longitude: (placemark.location?.coordinate.longitude)!)
                 self.annotation.title = "\(self.appDelegate.firstName) \(self.appDelegate.lastName)"
+            
+                completionHandler(true)
                 
+            }else{
+                completionHandler(false)
+            }
+        }
+    }
+    
+    @IBAction func searchLocationTouchUp(sender: AnyObject) {
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        
+        loadLocation(studentLocationText.text!) { success in
+            if (success == true) {
                 self.mapView.addAnnotation(self.annotation)
                 
                 let span = MKCoordinateSpanMake(0.1, 0.1)
@@ -120,26 +131,19 @@ class PostViewController: UIViewController, UITextFieldDelegate  {
                 self.findButton.hidden = true
                 self.infoLabel.hidden = false
                 self.infoLabel.text = "URL"
-                
-                self.activityIndicator.hidden = true
-                self.activityIndicator.stopAnimating()
             } else {
-                self.activityIndicator.hidden = true
-                self.activityIndicator.stopAnimating()
-                
                 dispatch_async(dispatch_get_main_queue(), {
                     let alertController = UIAlertController(title: "Alert", message:
                         "Location does not exists!", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-                
+                    
                     self.presentViewController(alertController, animated: true, completion: nil)
                 })
             }
+            
+            self.activityIndicator.hidden = true
+            self.activityIndicator.stopAnimating()
         }
-        
-        self.activityIndicator.hidden = true
-        self.activityIndicator.stopAnimating()
-    
     }
 
     func cancel(sender: UIBarButtonItem) {

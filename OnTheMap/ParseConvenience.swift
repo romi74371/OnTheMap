@@ -15,22 +15,22 @@ import MapKit
 extension ParseClient {
     // MARK: - GET Convenience Methods
     
-    func getStudentLocation(limit: Float, skip: Float, order: String, completionHandler: (success: Bool, locations: [StudentLocation], errorString: String?) -> Void) {
+    func getStudentLocation(limit: Float, skip: Float, order: String, completionHandler: (success: Bool, locations: [StudentLocation]?, errorString: String?) -> Void) {
         
         let parameters = [ParseClient.ParameterKeys.Limit: limit, ParseClient.ParameterKeys.Skip: skip, ParseClient.ParameterKeys.Order: order]
-        var resultLocations = [StudentLocation]()
         
         taskForGETMethod(Methods.StudentLocation, parameters: parameters as! [String : AnyObject]) { JSONResult, error in
-            /* 3. Send the desired value(s) to completion handler */
             if let error = error {
-                completionHandler(success: false, locations: resultLocations, errorString: "Get StudentLocation Failed.")
+                completionHandler(success: false, locations: nil, errorString: "Get StudentLocation Failed.")
             } else {
-                resultLocations = StudentLocation.locationFromResults((JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]])!)
-                completionHandler(success: true, locations: resultLocations, errorString: nil)
+                if let results = JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]] {
+                    let studentLocations = StudentLocation.locationFromResults(results)
+                    completionHandler(success: true, locations: studentLocations, errorString: nil)
+                } else {
+                    completionHandler(success: false, locations: nil, errorString: "Server error. Please try again later.")
+                }
             }
         }
-        
-        //completionHandler(success: true, locations: StudentLocation.locationFromResults(hardCodedLocationData()), errorString: nil)
     }
     
     // MARK: - POST Convenience Methods

@@ -84,7 +84,7 @@ class LocationlistViewController: UIViewController, UITableViewDelegate, UITable
         ParseClient.sharedInstance().getStudentLocation(100, skip: 10, order: "-\(ParseClient.JSONResponseKeys.CreatedAt)") { (success, result, errorString) in
             if (success == true) {
                 print("Locations loaded!")
-                ParseClient.sharedInstance().locations = result.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
+                ParseClient.sharedInstance().locations = result!.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
                 self.locationsTableView?.reloadData();
             } else {
                 print("Loading locations error!")
