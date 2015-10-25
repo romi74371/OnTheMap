@@ -60,6 +60,7 @@ extension ParseClient {
         // MARK: General
         static let Results = "results"
         static let Error = "error"
+        static let CreatedAt = "createdAt"
         static let UpdatedAt = "updatedAt"
         
     }

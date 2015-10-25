@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ParseClient.(taskForGETMethod(ParseClient) -&gt; (String, parameters : [String : AnyObject], completionHandler : (result : AnyObject!, error : NSError?) -&gt; ()) -&gt; NSURLSessionDataTask).(closure #1):ParseClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ParseClient.(taskForPOSTMethod(ParseClient) -&gt; (String, parameters : [String : AnyObject], jsonBody : [String : AnyObject], completionHandler : (result : AnyObject!, error : NSError?) -&gt; ()) -&gt; NSURLSessionDataTask).(closure #1):ParseClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ParseClient.taskForPOSTMethod(String, parameters : [String : AnyObject], jsonBody : [String : AnyObject], completionHandler : (result : AnyObject!, error : NSError?) -&gt; ()) -&gt; NSURLSessionDataTask:ParseClient.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(jsonBody)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

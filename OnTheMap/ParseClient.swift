@@ -41,9 +41,6 @@ class ParseClient : NSObject {
         request.addValue(apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         let task = session.dataTaskWithRequest(request) {data, response, error in
-            print(data)
-            print(response)
-            print(error)
             if error != nil { // Handle error...
                 _ = ParseClient.errorForData(data, response: response, error: error!)
                 completionHandler(result: nil, error: error)
@@ -60,46 +57,54 @@ class ParseClient : NSObject {
     
     func taskForPOSTMethod(method: String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        /* 1. Set the parameters */
         let mutableParameters = parameters
-        //mutableParameters[ParameterKeys.ApiKey] = Constants.ApiKey
         
-        /* 2/3. Build the URL and configure the request */
         let urlString = Constants.BaseURLSecure + method + ParseClient.escapedParameters(mutableParameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        var jsonifyError: NSError? = nil
         
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPMethod = "POST"        
         request.addValue(applicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
         } catch let error as NSError {
-            jsonifyError = error
             request.HTTPBody = nil
         }
         
-        /* 4. Make the request */
-        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
-            
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            if let error = downloadError {
+        let task = session.dataTaskWithRequest(request) {data, response, error in
+            if let error = error {
                 _ = ParseClient.errorForData(data, response: response, error: error)
-                completionHandler(result: nil, error: downloadError)
+                completionHandler(result: nil, error: error)
             } else {
-                //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                print(NSString(data: data!, encoding: NSUTF8StringEncoding))
                 ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
             }
         }
         
-        /* 7. Start the request */
         task.resume()
+
+        /*
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.HTTPMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Roman\", \"lastName\": \"Hauptvogel\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                return
+            }
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        }
+        task.resume()
+        */
         
         return task
+
     }
     
     // MARK: - Helpers

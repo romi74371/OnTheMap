@@ -74,9 +74,9 @@ extension ParseClient {
         let mutableMethod : String = Methods.StudentLocation
         
         let jsonBody : [String:AnyObject] = [
+            ParseClient.JSONBodyKeys.UniqueKey: uniqueKey,
             ParseClient.JSONBodyKeys.FistName: firstName,
             ParseClient.JSONBodyKeys.LastName: lastName,
-            ParseClient.JSONBodyKeys.UniqueKey: uniqueKey,
             ParseClient.JSONBodyKeys.MapString: mapString,
             ParseClient.JSONBodyKeys.MediaURL: mediaURL,
             ParseClient.JSONBodyKeys.Latitude: latitude,
@@ -91,7 +91,7 @@ extension ParseClient {
                 completionHandler(result: false, error: error.localizedDescription)
             } else {
                 print(JSONResult)
-                if JSONResult.valueForKey(ParseClient.JSONResponseKeys.UpdatedAt) != nil {
+                if JSONResult.valueForKey(ParseClient.JSONResponseKeys.CreatedAt) != nil {
                     completionHandler(result: true, error: nil)
                 } else {
                     if JSONResult.valueForKey(ParseClient.JSONResponseKeys.Error) != nil {
